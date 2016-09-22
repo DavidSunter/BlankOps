@@ -25,24 +25,20 @@ EOF
 sudo service mongod start
 
 #Add a user and group
-adduser --disabled-password --gecos "" dave
-addgroup webadmin
-adduser dave webadmin
-sudo chown -R dave:webadmin /var/www/html
-usermod -g webadmin www-data
-
-cd /var/www
-sudo rm -rf html
-mkdir html
-cd html
-git clone https://github.com/razki/bezzle.vs.razki.git .
+#adduser --disabled-password --gecos "" dave
+#addgroup webadmin
+#adduser dave webadmin
+#sudo chown -R dave:webadmin /var/www/html
+#usermod -g webadmin www-data
 
 sudo cp ~/servers/webserver/default /etc/nginx/sites-available/default -f
-sudo chown -R www-data:www-data ../../www/*
-sudo chmod -R 0775 ../../www/*
+sudo chown -R www-data:www-data /var/www
+sudo chmod -R 775 /var/www
 sudo service nginx restart
 
 #Run the app in the background of the code
-npm install
+#npm install
 sudo npm install pm2 -g
-pm2 start app.js
+#git clone https://github.com/razki/bezzle.vs.razki.git .
+pm2 kill
+#pm2 start app.js
