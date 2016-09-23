@@ -36,7 +36,7 @@ server {
     listen 80;
     server_name localhost:3000;
     location / {
-        proxy_pass http://localhost:8085;
+        proxy_pass http://178.62.74.83:8085;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
