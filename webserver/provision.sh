@@ -31,7 +31,21 @@ sudo service mongod start
 #sudo chown -R dave:webadmin /var/www/html
 #usermod -g webadmin www-data
 
-sudo cp ~/servers/webserver/default /etc/nginx/sites-available/default -f
+sudo tee -a /etc/nginx/sites-available/default <<EOF
+server {
+    listen 80;
+    server_name localhost:3000;
+    location / {
+        proxy_pass http://localhost:8085;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+EOF
+
 sudo chown -R www-data:www-data /var/www
 sudo chmod -R 775 /var/www
 sudo service nginx restart
