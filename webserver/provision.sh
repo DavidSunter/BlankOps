@@ -49,6 +49,9 @@ EOF
 sudo chown -R www-data:www-data /var/www
 sudo chmod -R 775 /var/www
 sudo service nginx restart
+sudo cp -R /root/workspace/David/app/. /var/www/html
+
+
 
 #Run the app in the background of the code
 #npm install
